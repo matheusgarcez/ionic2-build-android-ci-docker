@@ -1,6 +1,6 @@
-# ionic-build-android-ci-docker
+# ionic2-build-android-ci-docker
 
-This image provides all tools required to automatically build and Android app out of your ionic (and possibly also cordova) project.
+This image provides all tools required to automatically build and Android app out of your ionic 2 (and possibly also cordova) project.
 
 It is primarily meant to be run in a CI environment, such as Gitlab CI, but can certainly also be used to run the compilation process on any machine capable of running docker without having to go through the process of setting everything up.
 
@@ -9,14 +9,13 @@ It is primarily meant to be run in a CI environment, such as Gitlab CI, but can 
 Here is a sample .gitlab-ci.yml file for setting up the project and compiling it:
 
 ```yaml
-image: tobitheo/ionic-build-android-ci-docker:latest
+image: hakandilek/ionic2-build-android-ci-docker:latest
 
 compile_android:
   stage: build
   script:
     - cp debug.keystore ~/.android/debug.keystore
     - npm install
-    - bower install --allow-root
     - ionic config build
     - ionic state restore
     - ionic build android
