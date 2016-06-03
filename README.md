@@ -16,6 +16,7 @@ compile_android:
   script:
     - cp debug.keystore ~/.android/debug.keystore
     - npm install
+    - cordova platform update android    
     - ionic config build
     - ionic state restore
     - ionic build android
