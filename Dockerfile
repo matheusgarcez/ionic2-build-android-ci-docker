@@ -7,10 +7,10 @@ RUN apt-get update && apt-get install -y git lib32stdc++6 lib32z1 npm nodejs nod
 # Install android SDK, tools and platforms 
 RUN cd /opt && curl https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz -o android-sdk.tgz && tar xzf android-sdk.tgz && rm android-sdk.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
-RUN echo 'y' | /opt/android-sdk-linux/tools/android update sdk -u -a -t platform-tools,build-tools-23.0.3,android-23
+RUN echo 'y' | /opt/android-sdk-linux/tools/android update sdk -u -a -t platform-tools,build-tools-23.0.3
 
 # Install npm packages
-RUN npm i -g cordova ionic@beta gulp bower grunt phonegap node-gyp && npm cache clean
+RUN npm i -g cordova ionic@beta gulp bower typings node-gyp && npm cache clean
 
 # Create dummy app to build and preload gradle and maven dependencies
 RUN cd / && echo 'n' | ionic start app --v2 --ts && cd /app && ionic platform add android && ionic build android && rm -rf * .??* && rm /root/.android/debug.keystore
