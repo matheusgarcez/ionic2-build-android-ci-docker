@@ -12,6 +12,10 @@ RUN echo 'y' | /opt/android-sdk-linux/tools/android update sdk -u -a -t platform
 # Install npm packages
 RUN npm i -g cordova ionic node-gyp && npm cache clean
 
+RUN mkdir "$ANDROID_SDK/licenses" || true
+RUN echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_SDK/licenses/android-sdk-license"
+RUN echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_SDK/licenses/android-sdk-preview-license"
+
 # Create dummy app to build and preload gradle and maven dependencies
 RUN cd / && echo 'n' | ionic start app --v2 && cd /app && ionic platform add android && ionic build android && rm -rf * .??* && rm /root/.android/debug.keystore
 
